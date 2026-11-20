@@ -441,7 +441,7 @@ document.querySelectorAll('img[referrerpolicy="no-referrer"]').forEach(i => {
     window[cb] = d => { ok(d); delete window[cb]; s.remove(); };
     s.onerror = () => { no(); delete window[cb]; s.remove(); };
     s.src = API + '?' + new URLSearchParams({ ...params, callback: cb }); document.head.append(s);
-    setTimeout(() => { if (window[cb]) { no(); delete window[cb]; s.remove(); } }, 9000);
+    setTimeout(() => { if (window[cb]) { no(); window[cb] = () => { delete window[cb]; }; s.remove(); } }, 9000);  // Apps Script trả lời muộn vẫn gọi hàm: để hàm rỗng, tránh lỗi console
   });
   const post = params => fetch(API, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(params) });
   const liked = id => ls.get('tg-liked', {})[id];
