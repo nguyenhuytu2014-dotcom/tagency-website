@@ -1,0 +1,167 @@
+/* Trang "Profile doanh nghiệp × AI" (v9.2, 20/11/2026), dựng bởi website/tools/profile_ai.py.
+   Dùng khung chung của web (ab-hero, sec-head, steps, faq, cl-marquee); file này chỉ có các khối riêng .pai-*.
+   .pai-promo = khối giới thiệu dùng ở dich-vu.html và dich-vu-thiet-ke.html. */
+
+/* Đầu trang */
+.pai-hero .ab-hero-in h1{max-width:820px}
+.pai-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.pai-checks{display:flex;flex-wrap:wrap;gap:10px 28px;margin:28px 0 0;padding:0;list-style:none;font-size:15px;color:rgba(255,255,255,.86)}
+.pai-checks li{display:flex;align-items:center;gap:10px}
+.ck{flex:none;width:18px;height:18px;color:var(--sun)}
+
+/* Logo khách hàng */
+.pai-trust{padding:48px 0 56px;background:var(--ink);color:#fff;border-top:1px solid var(--glass-line)}
+.pai-trust-h{margin:0 0 24px;text-align:center;font-size:15px;color:rgba(255,255,255,.75)}
+.pai-trust-h b{margin-right:6px;font-size:22px;color:var(--sun)}
+
+/* Ba thứ không cần chụp */
+.pai-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.pai-card{position:relative;display:flex;flex-direction:column;padding:28px 28px 26px;border:1px solid var(--line);border-radius:var(--r);background:#fff;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s}
+.pai-card:hover{transform:translateY(-4px);border-color:transparent;box-shadow:0 24px 60px rgba(3,20,10,.1)}
+.pai-ic{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--deep),var(--green));color:var(--sun)}
+.pai-ic svg{width:26px;height:26px}
+.pai-card small{position:absolute;top:28px;right:28px;font-size:13px;font-weight:600;letter-spacing:.1em;color:var(--muted)}
+.pai-card h3{margin:18px 0 14px;font-size:22px;color:var(--deep)}
+.pai-card dl{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:0}
+.pai-card dt{padding-top:2px;font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--green);white-space:nowrap}
+.pai-card dd{margin:0;font-size:15px;line-height:1.6;color:var(--text)}
+
+/* Tự tạo nội dung cùng Tagi */
+.pai-tagi{background:radial-gradient(55% 70% at 8% 0%,rgba(30,122,16,.38),transparent 62%),var(--ink)}
+.pai-tg-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px 40px;align-items:end;margin-bottom:36px}
+.pai-tg-head .sec-head{max-width:720px;margin-bottom:8px}
+.pai-tg-mascot{width:clamp(140px,15vw,210px);height:auto;filter:drop-shadow(0 22px 36px rgba(0,0,0,.45))}
+.pai-tg{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:24px;align-items:stretch}
+.pai-tg-form{display:grid;gap:14px;align-content:start;padding:28px;border:1px solid var(--glass-line);border-radius:var(--r);background:var(--glass)}
+.pai-tg-form label{display:grid;gap:6px;font-size:13px;font-weight:500;color:rgba(255,255,255,.82)}
+.pai-tg-form label small{font-weight:400;color:rgba(255,255,255,.5)}
+.pai-tg-form input:not([type=radio]),.pai-tg-form select{width:100%;height:44px;padding:0 14px;border:1px solid var(--glass-line);border-radius:10px;background:rgba(255,255,255,.06);font:inherit;font-size:15px;color:#fff}
+.pai-tg-form input::placeholder{color:rgba(255,255,255,.4)}
+.pai-tg-form select option{color:var(--text)}
+.pai-tg-form input:focus,.pai-tg-form select:focus{outline:2px solid var(--sun);outline-offset:1px;border-color:transparent}
+.pai-tg-row{display:grid;grid-template-columns:1.4fr 1fr;gap:12px}
+.pai-tg-tone{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;border:0}
+.pai-tg-tone legend{width:100%;margin-bottom:6px;padding:0;font-size:13px;font-weight:500;color:rgba(255,255,255,.82)}
+.pai-tg-tone label{position:relative;display:block}
+.pai-tg-tone input{position:absolute;opacity:0;pointer-events:none}
+.pai-tg-tone span{display:inline-block;padding:8px 16px;border:1px solid var(--glass-line);border-radius:99px;font-size:14px;color:#fff;cursor:pointer;transition:background .2s,border-color .2s}
+.pai-tg-tone input:checked+span{border-color:var(--sun);background:var(--sun);font-weight:600;color:var(--deep)}
+.pai-tg-tone input:focus-visible+span{outline:2px solid var(--sun);outline-offset:2px}
+.pai-tg-form .btn{justify-self:start}
+.pai-tg-err{font-size:13.5px;color:#ffb4a8}
+.pai-tg-note{font-size:12.5px;line-height:1.55;color:rgba(255,255,255,.55)}
+.pai-tg-out{overflow:hidden;border-radius:var(--r);background:#fff;color:var(--text)}
+.pai-tg-empty{display:grid;place-content:center;justify-items:center;gap:10px;height:100%;min-height:420px;padding:36px;text-align:center;color:var(--muted)}
+.pai-tg-empty b{font-size:18px;color:var(--deep)}
+.pai-tg-empty p{max-width:380px;font-size:14.5px}
+.pai-sk{display:grid;gap:10px;width:min(320px,100%);margin-bottom:16px}
+.pai-sk i{height:10px;border-radius:6px;background:linear-gradient(90deg,var(--tint),#e9efe5,var(--tint));background-size:200% 100%;animation:pai-sk 1.6s ease-in-out infinite}
+.pai-sk i:nth-child(1){width:55%;height:16px}.pai-sk i:nth-child(3){width:85%}.pai-sk i:nth-child(5){width:70%}
+@keyframes pai-sk{to{background-position:-200% 0}}
+.pai-doc{display:flex;flex-direction:column;height:100%;max-height:640px}
+.pai-doc-body{flex:1;overflow:auto;padding:28px 30px 20px}
+.pai-doc-k{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.pai-doc h3{margin-top:6px;font-size:24px;color:var(--deep)}
+.pai-doc-sl{margin-top:2px;font-style:italic;color:var(--green)}
+.pai-doc h4{margin:22px 0 8px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.pai-doc p,.pai-doc li{font-size:15px;line-height:1.65}
+.pai-doc ul{margin:0;padding-left:18px}
+.pai-doc-toc{margin:0;padding:0;list-style:none}
+.pai-doc-toc li{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px dashed var(--line)}
+.pai-doc-toc li:last-child{border-bottom:0}
+.pai-doc-toc b{flex:none;width:28px;font-size:13px;color:var(--green)}
+.pai-doc-toc span{flex:1;font-weight:500;color:var(--deep)}
+.pai-doc-toc small{display:block;font-size:13px;font-weight:400;line-height:1.45;color:var(--muted)}
+.pai-tag{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:99px;font-size:11px;font-style:normal;font-weight:600;letter-spacing:.04em;white-space:nowrap}
+.t-ai{background:var(--deep);color:var(--sun)}
+.t-3d{background:var(--sun);color:var(--deep)}
+.t-ed{border:1px solid var(--line);background:var(--tint);color:var(--green)}
+.pai-doc-act{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:14px 30px;border-top:1px solid var(--line);background:var(--tint)}
+.pai-doc-act button{height:42px;padding:0 16px;border:1px solid var(--line);border-radius:99px;background:#fff;font-size:14px;font-weight:600;color:var(--deep);transition:border-color .2s}
+.pai-doc-act button:hover{border-color:var(--green)}
+.pai-doc-act .btn{margin-left:auto}
+
+/* Quy trình + cam kết */
+.pai-commit{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;margin-top:44px;padding:20px 26px;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+.pai-commit>b{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--deep)}
+.pai-commit ul{display:flex;flex-wrap:wrap;gap:10px 22px;margin:0;padding:0;list-style:none}
+.pai-commit li{display:flex;align-items:center;gap:8px;font-size:14.5px;color:var(--text)}
+.pai-commit .ck{color:var(--green)}
+
+/* So sánh */
+.pai-dark{background:var(--ink);color:#fff}
+.pai-cmp{width:100%;border:1px solid var(--glass-line);border-radius:var(--r);border-collapse:separate;border-spacing:0;overflow:hidden}
+.pai-cmp th,.pai-cmp td{padding:16px 22px;border-bottom:1px solid var(--glass-line);text-align:left;vertical-align:top;font-size:15px;line-height:1.6}
+.pai-cmp tbody tr:last-child th,.pai-cmp tbody tr:last-child td{border-bottom:0}
+.pai-cmp thead th{background:rgba(255,255,255,.06);font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.pai-cmp thead th:last-child{color:var(--sun)}
+.pai-cmp tbody th{width:18%;font-weight:600;color:#fff}
+.pai-cmp td{color:rgba(255,255,255,.66)}
+.pai-cmp td:last-child{background:rgba(245,211,28,.07);color:#fff}
+.pai-cmp td .ck{display:inline-block;margin-right:8px;vertical-align:-3px}
+.pai-note{margin-top:22px;text-align:center;font-size:15px;color:rgba(255,255,255,.72)}
+.pai-note a{border-bottom:1px solid;color:var(--sun)}
+
+/* Bàn giao */
+.pai-bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(210px,auto);gap:16px}
+.pai-tile{position:relative;display:flex;flex-direction:column;gap:8px;padding:26px;overflow:hidden;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+.pai-tile i{margin-bottom:auto;font-size:13px;font-style:normal;font-weight:600;letter-spacing:.1em;color:var(--green)}
+.pai-tile h3{font-size:18px;color:var(--deep)}
+.pai-tile p{font-size:14.5px;line-height:1.6;color:var(--muted)}
+.pai-tile p a{border-bottom:1px solid currentColor;color:var(--green)}
+.pai-shot{justify-content:flex-end;padding:0;border:0;background:var(--ink);color:#fff}
+.pai-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.pai-shot:hover img{transform:scale(1.04)}
+.pai-shot span{position:relative;padding:60px 22px 20px;background:linear-gradient(transparent,rgba(3,20,10,.88));font-size:14px;line-height:1.45}
+.pai-shot span b{display:block;font-size:16px}
+.pai-shot.big{grid-column:span 2;grid-row:span 2}
+
+/* Hỏi đáp */
+.pai-faq{max-width:900px}
+.pai-faq .faq details p{padding:0 0 22px;line-height:1.7;color:var(--muted)}
+.pai-faq-note{margin-top:28px;text-align:center;color:var(--muted)}
+.pai-faq-note a{font-weight:600;color:var(--green)}
+
+/* Khối giới thiệu ở trang Dịch vụ */
+.pai-promo{padding:0 0 96px}
+.pai-promo-in{position:relative;isolation:isolate;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:20px 36px;padding:34px 40px;overflow:hidden;border-radius:var(--r);background:var(--ink);color:#fff}
+.pai-promo-in::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(70% 140% at 100% 50%,rgba(30,122,16,.35),transparent 60%)}
+.pai-promo-k{font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--sun)}
+.pai-promo-t b{display:block;font-size:clamp(20px,2.2vw,28px);font-weight:600;line-height:1.25;letter-spacing:-.015em}
+.pai-promo-t span{display:block;margin-top:6px;font-size:15px;color:rgba(255,255,255,.72)}
+.pai-promo-go{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;font-weight:600;color:var(--sun)}
+.pai-promo-go .i{transition:transform .3s}
+.pai-promo-in:hover .pai-promo-go .i{transform:translateX(4px)}
+
+@media (max-width:1080px){
+  .pai-cards{grid-template-columns:1fr 1fr}
+  .pai-bento{grid-template-columns:1fr 1fr}
+  .pai-tg{grid-template-columns:1fr}
+  .pai-doc{max-height:560px}
+}
+@media (max-width:860px){
+  .pai-cards{grid-template-columns:1fr}
+  .pai-tg-head{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .pai-tg-head .sec-head{text-align:center}
+  .pai-promo-in{grid-template-columns:1fr;padding:28px 24px}
+}
+@media (max-width:680px){
+  .pai-bento{grid-template-columns:1fr}
+  .pai-shot.big{grid-column:auto;grid-row:auto}
+  .pai-shot{min-height:240px}
+  .pai-tg-form{padding:22px 18px}
+  .pai-tg-row{grid-template-columns:1fr}
+  .pai-tg-empty{min-height:300px;padding:28px 22px}
+  .pai-doc-body{padding:22px 20px 16px}
+  .pai-doc-act{padding:14px 20px}
+  .pai-doc-act .btn{margin-left:0}
+  .pai-commit{padding:18px 20px}
+  .pai-cmp thead{display:none}
+  .pai-cmp,.pai-cmp tbody,.pai-cmp tr,.pai-cmp th,.pai-cmp td{display:block;width:auto}
+  .pai-cmp tbody tr{padding:16px 18px;border-bottom:1px solid var(--glass-line)}
+  .pai-cmp tbody tr:last-child{border-bottom:0}
+  .pai-cmp tbody th,.pai-cmp td{width:auto;padding:6px 0;border:0}
+  .pai-cmp td::before{content:attr(data-l);display:block;margin-bottom:2px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+  .pai-cmp td:last-child{margin-top:8px;padding:10px 12px;border-radius:10px}
+}
+@media (prefers-reduced-motion:reduce){.pai-sk i{animation:none}}
