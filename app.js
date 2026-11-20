@@ -466,9 +466,16 @@ document.querySelectorAll('img[referrerpolicy="no-referrer"]').forEach(i => {
       const l = $('.soc-like b', w), c = $('.soc-cmt b', w); if (l) l.textContent = fmt(s.likes); if (c) c.textContent = fmt(s.comments);
     });
   };
-  if (API && ids.length) jsonp({ type: 'stats', ids: ids.join(',') }).then(d => {
+  const loadStats = () => jsonp({ type: 'stats', ids: ids.join(',') }).then(d => {
     if (d && d.stats) Object.entries(d.stats).forEach(([k, v]) => stats[k] = v); paint();
   }).catch(() => {});
+  if (API && ids.length) {  // chỉ gọi Apps Script khi khách cuộn gần tới phần thả tim/bình luận: trang mở nhanh hơn
+    const els = $$('[data-soc-id], .soc');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); loadStats(); } }, { rootMargin: '600px 0px' });
+      els.forEach(e => io.observe(e));
+    } else loadStats();
+  }
 
   // thanh tương tác đầy đủ
   $$('.soc').forEach(w => {

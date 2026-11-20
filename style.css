@@ -783,7 +783,7 @@ a:hover>.media .m-fg,a:hover .media .m-fg{transform:scale(1.045)}
 .ai-in{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;margin-bottom:64px}
 .ai-side h2{font-size:clamp(28px,3.3vw,46px)}
 .ai-side p{font-size:17px;max-width:520px}
-.ai-prompt{display:flex;align-items:center;gap:12px;width:min(520px,100%);padding:14px 18px;margin-bottom:28px;border-radius:14px;border:1px solid rgba(245,211,28,.4);background:rgba(3,20,10,.55);font-size:15.5px;color:#fff;box-shadow:0 0 0 0 rgba(245,211,28,.35);animation:ring 3s ease-out infinite}
+.ai-prompt{display:flex;align-items:center;gap:12px;width:min(520px,100%);padding:14px 18px;margin-bottom:28px;border-radius:14px;border:1px solid rgba(245,211,28,.4);background:rgba(3,20,10,.55);font-size:15.5px;color:#fff}
 .ai-prompt .i{color:var(--sun);animation:spin 6s linear infinite}
 .ai-prompt b{width:2px;height:20px;background:var(--sun);margin-left:-8px;animation:blink 1s steps(1) infinite}
 @keyframes ring{0%{box-shadow:0 0 0 0 rgba(245,211,28,.35)}70%,100%{box-shadow:0 0 0 16px rgba(245,211,28,0)}}
@@ -850,7 +850,7 @@ a:hover>.media .m-fg,a:hover .media .m-fg{transform:scale(1.045)}
 .tp:hover{border-color:var(--c);transform:translateY(-3px);box-shadow:0 8px 24px color-mix(in srgb,var(--c) 40%,transparent)}
 .tp b{display:grid;place-items:center;min-width:26px;height:26px;padding:0 4px;border-radius:50%;background:var(--c);color:#06220c;font-size:10.5px;font-weight:800}
 .ai-prompt{position:relative;overflow:hidden}
-.ai-prompt::after{content:"";position:absolute;top:0;bottom:0;width:60px;left:-80px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);animation:scan 3.6s ease-in-out infinite}
+.ai-prompt::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 42%,rgba(255,255,255,.25) 50%,transparent 58%);transform:translateX(-100%);animation:scanx 3.6s ease-in-out infinite;pointer-events:none}
 @keyframes scan{to{left:110%}}
 .ai-card{transition:transform .35s,box-shadow .35s}
 .ai-card:hover{transform:translateY(-8px);box-shadow:0 24px 50px -20px rgba(91,227,58,.5)}
@@ -1968,3 +1968,8 @@ img,video{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
 /* v8: bìa dự án kiểu Về chúng tôi */
 .case-hero{position:relative;isolation:isolate;min-height:600px;display:flex;align-items:flex-end}.case-hero>.wrap{position:relative;z-index:1;width:min(var(--wrap),100% - 48px)}
 @media (max-width:680px){.case-hero{min-height:0}}
+
+/* 20/11: vòng sáng + vệt quét khối AI chạy bằng opacity/transform (không vẽ lại mỗi khung hình) */
+.ai-prompt::before{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 2px rgba(245,211,28,.55);opacity:0;animation:ringo 3s ease-out infinite;pointer-events:none}
+@keyframes ringo{0%{opacity:1}70%,100%{opacity:0}}@keyframes scanx{to{transform:translateX(100%)}}
+@media(prefers-reduced-motion:reduce){.ai-prompt::before{animation:none}}
