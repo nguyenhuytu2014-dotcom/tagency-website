@@ -713,7 +713,7 @@ a:hover>.media .m-fg,a:hover .media .m-fg{transform:scale(1.045)}
 .ft-row small{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px}
 .ft-row>a{color:#fff;font-weight:600;font-size:16px}
 .ft-row>a:hover{color:var(--sun)}
-.ft-social{display:flex;gap:8px}
+.ft-social{display:flex;flex-wrap:wrap;gap:8px}
 .ft-social a{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;border:1px solid var(--glass-line);color:#fff;transition:.25s}
 .ft-social a:hover{background:var(--sun);border-color:var(--sun);color:var(--ink)}
 .ft-social .i{width:18px;height:18px}
