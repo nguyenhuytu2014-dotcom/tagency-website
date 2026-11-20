@@ -25,13 +25,13 @@
   });
 
   // mega menu: click toggles (mobile accordion, desktop keyboard/touch)
-  $$('.has-mega > .nav-link').forEach(btn => btn.addEventListener('click', () => {
+  $$('.has-mega > .mega-tg').forEach(btn => btn.addEventListener('click', () => {
     const li = btn.parentElement, open = !li.classList.contains('open');
-    $$('.has-mega.open').forEach(o => { if (o !== li) { o.classList.remove('open'); $('.nav-link', o).setAttribute('aria-expanded', 'false'); } });
+    $$('.has-mega.open').forEach(o => { if (o !== li) { o.classList.remove('open'); $('.mega-tg', o).setAttribute('aria-expanded', 'false'); } });
     li.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open));
   }));
   document.addEventListener('click', e => {
-    if (!mobile() && !e.target.closest('.has-mega')) $$('.has-mega.open').forEach(o => { o.classList.remove('open'); $('.nav-link', o).setAttribute('aria-expanded', 'false'); });
+    if (!mobile() && !e.target.closest('.has-mega')) $$('.has-mega.open').forEach(o => { o.classList.remove('open'); $('.mega-tg', o).setAttribute('aria-expanded', 'false'); });
   });
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
@@ -182,12 +182,12 @@
       const d = Object.fromEntries(new FormData(form));
       d.page = location.pathname.split('/').pop() || 'index.html'; d.time = new Date().toISOString();
       const mail = () => {
-        const subject = `[Đặt lịch] ${d.service} — ${d.company || d.name}`;
+        const subject = `[Đặt lịch] ${d.service} - ${d.company || d.name}`;
         const body = `Họ tên: ${d.name}\nCông ty: ${d.company || ''}\nĐiện thoại: ${d.phone}\nEmail: ${d.email || ''}\nDịch vụ: ${d.service}\nTrang: ${d.page}\n\n${d.message}`;
         location.href = `mailto:agencymedia.t@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        ok.hidden = false; ok.textContent = 'Đã mở ứng dụng email với nội dung bạn điền — hãy bấm Gửi để hoàn tất.';
+        ok.hidden = false; ok.textContent = 'Đã mở ứng dụng email với nội dung bạn điền - hãy bấm Gửi để hoàn tất.';
       };
-      const ep = form.dataset.endpoint;
+      const ep = form.dataset.endpoint || window.TG_API; d.type = 'lead'; d.source = 'form';
       if (!ep) return mail();
       btn.disabled = true;
       fetch(ep, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(d) })
@@ -285,7 +285,7 @@
   }
 })();
 
-/* v6.1: mega menu Dịch vụ — rê chuột/focus để đổi tab */
+/* v6.1: mega menu Dịch vụ - rê chuột/focus để đổi tab */
 (() => {
   document.querySelectorAll('.svm').forEach(m => {
     const tabs = [...m.querySelectorAll('.svm-tab')], panels = [...m.querySelectorAll('.svm-panel')];
@@ -294,7 +294,7 @@
   });
 })();
 
-/* v6.3: Tagi AI — trợ lý tư vấn tự động (kịch bản, chạy trên trình duyệt) */
+/* v6.3: Tagi AI - trợ lý tư vấn tự động (kịch bản, chạy trên trình duyệt) */
 (() => {
   const PHONE = '0369 222 331', TEL = 'tel:0369222331', ZALO = 'https://zalo.me/0369222331', MAIL = 'agencymedia.t@gmail.com';
   const AV = 'assets/tagi-avatar.webp';
@@ -314,13 +314,13 @@
     web: { k: ['web', 'website', 'landing', 'trang', 'seo'],
       a: 'Mình làm <b>website giới thiệu doanh nghiệp, landing page chiến dịch, website dự án và trang portfolio</b>, có sẵn biểu mẫu thu khách. Xem <a href="dich-vu-thiet-ke-website">Thiết kế website</a>.' },
     ai: { k: ['ai', 'chatgpt', 'gpt', 'claude', 'gemini', 'tu dong', 'chatbot', 'prompt'],
-      a: 'TAGENCY có <b>6 gói AI</b>: AI Mirror (ChatGPT nói gì về công ty bạn), Brand Voice, Mascot Live, Ký ức chuyển động, Studio không máy quay, Cỗ máy nội dung 30 ngày. <a href="ai-marketing#goi-ai">Mở các gói AI</a> — có cả bản soi AI miễn phí.' },
+      a: 'TAGENCY có <b>6 gói AI</b>: AI Mirror (ChatGPT nói gì về công ty bạn), Brand Voice, Mascot Live, Ký ức chuyển động, Studio không máy quay, Cỗ máy nội dung 30 ngày. <a href="ai-marketing#goi-ai">Mở các gói AI</a> - có cả bản soi AI miễn phí.' },
     gia: { k: ['gia', 'chi phi', 'bao nhieu', 'bao gia', 'ngan sach', 'tien', 'phi'],
       a: 'Chi phí phụ thuộc vào <b>loại sản phẩm, độ dài, số bối cảnh và thời gian cần bàn giao</b>, nên TAGENCY không đưa giá chung chung. Buổi trao đổi đầu tiên <b>miễn phí</b>; sau khi nắm brief, bên mình gửi báo giá chi tiết theo từng hạng mục. Bạn có thể cho mình biết ngân sách dự kiến để được tư vấn phương án phù hợp.' },
     quytrinh: { k: ['quy trinh', 'bao lau', 'thoi gian', 'tien do', 'lam the nao', 'cac buoc'],
       a: 'Quy trình <b>T·A·G</b> 6 bước: lắng nghe brief → định vị thông điệp → concept hình ảnh → kịch bản & storyboard → sản xuất & hậu kỳ → bàn giao. Thời gian tùy hạng mục, sẽ được chốt cùng mốc duyệt ngay từ đầu. <a href="gioi-thieu#quy-trinh">Xem quy trình</a>.' },
     duan: { k: ['du an', 'portfolio', 'khach hang', 'da lam', 'case', 'mau'],
-      a: 'Bạn xem các dự án đã chia theo từng loại sản phẩm tại <a href="du-an">trang Dự án</a> — phim, animation, mascot, nhận diện, ấn phẩm, sự kiện… Phim và video có trên <a href="https://www.youtube.com/@tmediaagency8888" target="_blank" rel="noopener">kênh YouTube</a>.' },
+      a: 'Bạn xem các dự án đã chia theo từng loại sản phẩm tại <a href="du-an">trang Dự án</a> - phim, animation, mascot, nhận diện, ấn phẩm, sự kiện… Phim và video có trên <a href="https://www.youtube.com/@tmediaagency8888" target="_blank" rel="noopener">kênh YouTube</a>.' },
     lienhe: { k: ['lien he', 'sdt', 'so dien thoai', 'hotline', 'zalo', 'email', 'dia chi', 'goi'],
       a: `Bạn gọi hoặc nhắn Zalo <a href="${TEL}">${PHONE}</a>, email <a href="mailto:${MAIL}">${MAIL}</a>. Hoặc để lại số, TAGENCY sẽ gọi lại.` },
     chao: { k: ['xin chao', 'chao', 'hello', 'hi', 'alo'], a: 'Chào bạn! Bạn đang cần làm sản phẩm hình ảnh nào để mình tư vấn đúng hướng?' },
@@ -358,16 +358,22 @@
   };
   const finishLead = () => {
     step = null;
-    const msg = `Khách chat Tagi AI — ${lead.name}, SĐT ${lead.phone}. Nhu cầu: ${lead.need}`;
+    const msg = `Khách chat Tagi AI - ${lead.name}, SĐT ${lead.phone}. Nhu cầu: ${lead.need}`;
+    if (window.TG_API) {
+      fetch(window.TG_API, { method: 'POST', mode: 'no-cors', body: new URLSearchParams({ type: 'lead', source: 'tagi', name: lead.name, phone: lead.phone, message: lead.need, service: 'Chat Tagi AI', page: location.pathname.split('/').pop() || 'index.html' }) })
+        .then(() => bot(`Cảm ơn ${lead.name}! TAGENCY đã nhận thông tin và sẽ gọi lại cho bạn sớm. Cần gấp, bạn gọi <a href="${TEL}">${PHONE}</a> nhé.`, [['Hỏi việc khác', 'menu']]))
+        .catch(() => bot(`Mạng đang chập chờn, bạn gọi <a href="${TEL}">${PHONE}</a> hoặc nhắn <a href="${ZALO}" target="_blank" rel="noopener">Zalo</a> giúp mình nhé.`));
+      return;
+    }
     const f = document.querySelector('#dat-lich form.brief');
     if (f) {
       f.querySelector('[name=name]').value = lead.name; f.querySelector('[name=phone]').value = lead.phone;
       f.querySelector('[name=message]').value = lead.need;
-      bot(`Cảm ơn ${lead.name}! Mình đã điền sẵn thông tin vào form <b>Đặt lịch trao đổi</b> — bạn chỉ cần bấm gửi. Hoặc gọi ngay <a href="${TEL}">${PHONE}</a>.`, [['Tới form đặt lịch', 'goform'], ['Nhắn Zalo', 'zalo']]);
+      bot(`Cảm ơn ${lead.name}! Mình đã điền sẵn thông tin vào form <b>Đặt lịch trao đổi</b> - bạn chỉ cần bấm gửi. Hoặc gọi ngay <a href="${TEL}">${PHONE}</a>.`, [['Tới form đặt lịch', 'goform'], ['Nhắn Zalo', 'zalo']]);
     } else {
       bot(`Cảm ơn ${lead.name}! Bấm nút dưới để gửi thông tin cho TAGENCY qua email, hoặc nhắn Zalo <a href="${ZALO}" target="_blank" rel="noopener">${PHONE}</a>.`);
       const c = document.createElement('div'); c.className = 'tg-chips';
-      c.innerHTML = `<a href="mailto:${MAIL}?subject=${encodeURIComponent('Tư vấn từ Tagi AI — ' + lead.name)}&body=${encodeURIComponent(msg)}">Gửi email</a><a href="${ZALO}" target="_blank" rel="noopener">Nhắn Zalo</a>`;
+      c.innerHTML = `<a href="mailto:${MAIL}?subject=${encodeURIComponent('Tư vấn từ Tagi AI - ' + lead.name)}&body=${encodeURIComponent(msg)}">Gửi email</a><a href="${ZALO}" target="_blank" rel="noopener">Nhắn Zalo</a>`;
       setTimeout(() => { body.append(c); scroll(); }, 600);
     }
   };
@@ -388,7 +394,7 @@
   let started = false;
   const openWin = () => {
     win.classList.add('open'); fab.classList.add('hide');
-    if (!started) { started = true; say('Xin chào! Mình là <b>Tagi</b> — trợ lý AI của TAGENCY 👋<br>Bạn đang cần làm gì để mình gợi ý đúng dịch vụ và dự án mẫu?'); chips(MENU); }
+    if (!started) { started = true; say('Xin chào! Mình là <b>Tagi</b> - trợ lý AI của TAGENCY 👋<br>Bạn đang cần làm gì để mình gợi ý đúng dịch vụ và dự án mẫu?'); chips(MENU); }
     setTimeout(() => input.focus(), 250);
   };
   function close() { win.classList.remove('open'); fab.classList.remove('hide'); }
@@ -415,15 +421,243 @@ document.querySelectorAll('img[referrerpolicy="no-referrer"]').forEach(i => {
   }));
 })();
 
-/* v6.8: vào trang mới luôn bắt đầu từ đầu trang (kể cả khi xem trong khung nhúng) */
+/* v7.7: mọi lần mở trang mới đều bắt đầu từ đầu trang (trừ khi có #mục) */
 (() => {
-  const nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
-  const fresh = !nav || nav.type === 'navigate' || nav.type === 'reload';
-  const toTop = () => {
-    if (location.hash || !fresh) return;
-    window.scrollTo(0, 0);
-    try { document.documentElement.scrollIntoView({ block: 'start' }); } catch (e) {}
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  const toTop = () => { if (location.hash) return; window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); };
+  toTop(); document.addEventListener('DOMContentLoaded', toTop); addEventListener('load', toTop); addEventListener('pageshow', toTop);
+})();
+
+/* v7: thả tim + bình luận (Tin tức, Tài nguyên). Lưu vào Google Sheet qua window.TG_API; chưa có API thì chạy chế độ xem thử (localStorage). */
+(() => {
+  const API = window.TG_API || '';
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const ls = { get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+               set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+  const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  let jn = 0;
+  const jsonp = params => new Promise((ok, no) => {
+    const cb = '__tg' + (++jn) + Date.now(), s = document.createElement('script');
+    window[cb] = d => { ok(d); delete window[cb]; s.remove(); };
+    s.onerror = () => { no(); delete window[cb]; s.remove(); };
+    s.src = API + '?' + new URLSearchParams({ ...params, callback: cb }); document.head.append(s);
+    setTimeout(() => { if (window[cb]) { no(); delete window[cb]; s.remove(); } }, 9000);
+  });
+  const post = params => fetch(API, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(params) });
+  const liked = id => ls.get('tg-liked', {})[id];
+  const setLiked = (id, v) => { const m = ls.get('tg-liked', {}); if (v) m[id] = 1; else delete m[id]; ls.set('tg-liked', m); };
+  const localCmts = id => ls.get('tg-cmt-' + id, []);
+  const fmt = n => n >= 1000 ? (n / 1000).toFixed(1).replace('.0', '') + 'K' : String(n);
+  const HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.2 4.4 2.5.8-1.3 2.3-2.5 4.4-2.5 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg>';
+  const BUBBLE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>';
+
+  // số liệu cho mọi phần tử cần đếm
+  const ids = [...new Set([...$$('[data-soc-id]').map(e => e.dataset.socId), ...$$('.soc').map(e => e.dataset.id)])];
+  const stats = {};
+  ids.forEach(id => stats[id] = { likes: liked(id) && !API ? 1 : 0, comments: API ? 0 : localCmts(id).length });
+  const paint = () => {
+    $$('[data-soc-id]').forEach(el => {
+      const s = stats[el.dataset.socId]; if (!s) return;
+      let m = $('.soc-mini', el); if (!m) { m = document.createElement('span'); m.className = 'soc-mini'; (el.querySelector('.nx-tx, .rs-body, .dg-tx') || el).append(m); }
+      m.innerHTML = `<i class="${liked(el.dataset.socId) ? 'on' : ''}">${HEART}${fmt(s.likes)}</i><i>${BUBBLE}${fmt(s.comments)}</i>`;
+    });
+    $$('.soc').forEach(w => {
+      const s = stats[w.dataset.id]; if (!s) return;
+      const l = $('.soc-like b', w), c = $('.soc-cmt b', w); if (l) l.textContent = fmt(s.likes); if (c) c.textContent = fmt(s.comments);
+    });
   };
-  toTop();
-  addEventListener('load', toTop, { once: true });
+  if (API && ids.length) jsonp({ type: 'stats', ids: ids.join(',') }).then(d => {
+    if (d && d.stats) Object.entries(d.stats).forEach(([k, v]) => stats[k] = v); paint();
+  }).catch(() => {});
+
+  // thanh tương tác đầy đủ
+  $$('.soc').forEach(w => {
+    const id = w.dataset.id, url = w.dataset.url || location.href.split('#')[0];
+    w.innerHTML = `<div class="soc-bar">
+<button type="button" class="soc-like" aria-pressed="false">${HEART}<span>Thích</span><b>0</b></button>
+<button type="button" class="soc-cmt" aria-expanded="false">${BUBBLE}<span>Bình luận</span><b>0</b></button>
+<div class="soc-share"><a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}" target="_blank" rel="noopener">Chia sẻ Facebook</a><button type="button" class="soc-copy">Sao chép link</button></div></div>
+<div class="soc-box" hidden><ul class="soc-list"></ul>
+<form class="soc-form" novalidate><img src="assets/tagi-avatar.webp" alt="" width="36" height="36"><div class="soc-fields">
+<input name="name" maxlength="60" placeholder="Tên của bạn" autocomplete="name"><textarea name="text" rows="2" maxlength="1000" placeholder="Viết bình luận…" required></textarea>
+<input name="website" tabindex="-1" autocomplete="off" class="soc-hp" aria-hidden="true"><div class="soc-row"><small class="soc-note"></small><button type="submit">Gửi</button></div></div></form></div>`;
+    const like = $('.soc-like', w), cbtn = $('.soc-cmt', w), box = $('.soc-box', w), list = $('.soc-list', w), form = $('.soc-form', w), note = $('.soc-note', w);
+    if (!API) note.textContent = 'Chế độ xem thử: tim và bình luận chỉ lưu trên máy bạn.';
+    const sync = () => { const on = !!liked(id); like.classList.toggle('on', on); like.setAttribute('aria-pressed', String(on)); };
+    sync();
+    like.addEventListener('click', () => {
+      const on = !liked(id); setLiked(id, on); stats[id].likes = Math.max(0, stats[id].likes + (on ? 1 : -1)); sync(); paint();
+      like.classList.remove('pop'); void like.offsetWidth; like.classList.add('pop');
+      if (API) post({ type: 'like', id, delta: on ? 1 : -1 }).catch(() => {});
+    });
+    const item = (c, pending) => `<li${pending ? ' class="pending"' : ''}><span class="soc-av">${esc((c.name || 'B')[0].toUpperCase())}</span><div><b>${esc(c.name || 'Bạn đọc')}</b>${pending ? '<em>' + pending + '</em>' : ''}<p>${esc(c.text)}</p></div></li>`;
+    let loaded = false;
+    const load = () => {
+      if (loaded) return; loaded = true;
+      const mine = localCmts(id);
+      if (!API) { list.innerHTML = mine.map(c => item(c, 'chỉ trên máy bạn')).join('') || '<li class="soc-empty">Chưa có bình luận. Hãy là người đầu tiên!</li>'; return; }
+      list.innerHTML = '<li class="soc-empty">Đang tải bình luận…</li>';
+      jsonp({ type: 'comments', id }).then(d => {
+        const arr = (d && d.comments) || [];
+        list.innerHTML = arr.map(c => item(c)).join('') + mine.filter(m => m.pending).map(c => item(c, 'chờ duyệt')).join('') || '<li class="soc-empty">Chưa có bình luận. Hãy là người đầu tiên!</li>';
+      }).catch(() => { list.innerHTML = '<li class="soc-empty">Chưa tải được bình luận.</li>'; });
+    };
+    cbtn.addEventListener('click', () => { const open = box.hidden; box.hidden = !open; cbtn.setAttribute('aria-expanded', String(open)); if (open) { load(); setTimeout(() => form.text.focus(), 50); } });
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const text = form.text.value.trim(), name = form.name.value.trim() || 'Bạn đọc';
+      if (text.length < 2) { form.text.focus(); return; }
+      if (form.website.value) return;
+      const c = { name, text, time: Date.now(), pending: !!API };
+      const mine = localCmts(id); mine.push(c); ls.set('tg-cmt-' + id, mine);
+      list.querySelector('.soc-empty')?.remove();
+      list.insertAdjacentHTML('beforeend', item(c, API ? 'chờ duyệt' : 'chỉ trên máy bạn'));
+      form.text.value = '';
+      if (API) { post({ type: 'comment', id, name, text, page: location.pathname.split('/').pop() }).catch(() => {}); note.textContent = 'Cảm ơn bạn! Bình luận sẽ hiển thị sau khi được duyệt.'; }
+      else { stats[id].comments++; paint(); }
+    });
+    $('.soc-copy', w).addEventListener('click', e => {
+      const b = e.currentTarget; (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(() => { b.textContent = 'Đã sao chép ✓'; }, () => { b.textContent = url; });
+      setTimeout(() => { b.textContent = 'Sao chép link'; }, 2200);
+    });
+  });
+  paint();
+})();
+
+/* v7: lọc trang Tài nguyên */
+(() => {
+  const chips = [...document.querySelectorAll('.pchip[data-rs]')]; if (!chips.length) return;
+  const items = [...document.querySelectorAll('.rs-card, .rs-fonts, .sk')];
+  chips.forEach(c => c.addEventListener('click', () => {
+    const f = c.dataset.rs;
+    chips.forEach(x => { const on = x === c; x.classList.toggle('active', on); x.setAttribute('aria-pressed', String(on)); });
+    items.forEach(k => k.classList.toggle('hide', f !== 'all' && k.dataset.cat !== f));
+  }));
+})();
+
+/* v7.1: lọc Kho tài nguyên */
+(() => {
+  const chips = [...document.querySelectorAll('.pchip[data-k]')]; if (!chips.length) return;
+  const cards = [...document.querySelectorAll('.kr')], kho = document.querySelector('.kho'), hoc = document.querySelector('.kho-hoc');
+  chips.forEach(c => c.addEventListener('click', () => {
+    const f = c.dataset.k;
+    chips.forEach(x => { const on = x === c; x.classList.toggle('active', on); x.setAttribute('aria-pressed', String(on)); });
+    cards.forEach(k => k.classList.toggle('hide', f !== 'all' && f !== 'hoc' && k.dataset.k !== f));
+    kho && kho.classList.toggle('hide', f === 'hoc');
+    hoc && hoc.classList.toggle('hide', f !== 'all' && f !== 'hoc');
+  }));
+})();
+
+/* v7.2: mở toàn bộ khách hàng */
+document.querySelectorAll('[data-cl-all]').forEach(b => b.addEventListener('click', () => {
+  const g = b.closest('.wrap').querySelector('.cl-all'); if (!g) return;
+  const open = g.hidden; g.hidden = !open; b.setAttribute('aria-expanded', String(open));
+  b.textContent = open ? 'Thu gọn' : b.textContent.replace('Thu gọn', '') || 'Xem toàn bộ khách hàng';
+  if (!open) b.textContent = 'Xem toàn bộ ' + g.children.length + ' khách hàng';
+}));
+
+/* v7.3: tab loại website */
+(() => {
+  const tabs = [...document.querySelectorAll('.wv-tab')]; if (!tabs.length) return;
+  const panels = [...document.querySelectorAll('.wv-panel')];
+  const show = k => { tabs.forEach(t => { const on = t.dataset.wv === k; t.classList.toggle('on', on); t.setAttribute('aria-selected', String(on)); }); panels.forEach(p => p.classList.toggle('on', p.dataset.wv === k)); };
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.wv)));
+  const fromHash = () => { const m = location.hash.match(/^#web-([\w-]+)$/); if (m) { show(m[1]); document.getElementById('loai-website').scrollIntoView({ block: 'start' }); } };
+  addEventListener('hashchange', fromHash); fromHash();
+})();
+
+/* v7.4: lọc dự án website */
+(() => {
+  const chips = [...document.querySelectorAll('.pchip[data-wp]')]; if (!chips.length) return;
+  const cards = [...document.querySelectorAll('.wp')];
+  chips.forEach(c => c.addEventListener('click', () => {
+    const f = c.dataset.wp;
+    chips.forEach(x => { const on = x === c; x.classList.toggle('active', on); x.setAttribute('aria-pressed', String(on)); });
+    cards.forEach(k => k.classList.toggle('hide', f !== 'all' && k.dataset.wp !== f));
+  }));
+})();
+
+/* v7.6: thư viện phim YouTube */
+(() => {
+  const lib = document.getElementById('phim-youtube'); if (!lib) return;
+  const chips = [...lib.querySelectorAll('.pchip[data-yt]')], cards = [...lib.querySelectorAll('.yt-card')];
+  chips.forEach(c => c.addEventListener('click', () => {
+    const f = c.dataset.yt;
+    chips.forEach(x => { const on = x === c; x.classList.toggle('active', on); x.setAttribute('aria-pressed', String(on)); });
+    cards.forEach(k => k.classList.toggle('hide', f !== 'all' && k.dataset.yt !== f));
+  }));
+  let framed = false; try { framed = window.self !== window.top; } catch (e) { framed = true; }
+  if (framed || location.protocol === 'file:') return; // trong khung xem thử: mở YouTube ở tab mới
+  const m = document.createElement('div'); m.className = 'yt-modal'; m.hidden = true;
+  m.innerHTML = '<div></div><button type="button" aria-label="Đóng">×</button>'; document.body.append(m);
+  const close = () => { m.hidden = true; m.firstChild.innerHTML = ''; };
+  m.addEventListener('click', e => { if (e.target === m || e.target.tagName === 'BUTTON') close(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !m.hidden) close(); });
+  cards.forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube.com/embed/' + a.dataset.ytId + '?autoplay=1&rel=0&playsinline=1&origin=' + encodeURIComponent(location.origin);
+    f.referrerPolicy = 'strict-origin-when-cross-origin'; f.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture'; f.allowFullscreen = true;
+    m.firstChild.innerHTML = ''; m.firstChild.append(f); m.hidden = false;
+  }));
+})();
+
+/* v7.7: phát phim trên trang phim + nút xem thêm */
+(() => {
+  document.querySelectorAll('[data-fm-more]').forEach(b => b.addEventListener('click', () => {
+    const g = b.closest('.pr-shelf').querySelector('.fm-more'); if (!g) return;
+    g.hidden = !g.hidden; b.textContent = g.hidden ? 'Xem thêm ' + g.children.length + ' ' + (b.dataset.word || 'phim') : 'Thu gọn';
+  }));
+  const p = document.querySelector('.fm-player'); if (!p) return;
+  // luôn phát ngay trên trang; kèm link dự phòng nếu trình duyệt chặn trình phát nhúng
+  if (!p.nextElementSibling || !p.nextElementSibling.classList.contains('fm-alt')) {
+    const alt = document.createElement('p'); alt.className = 'fm-alt';
+    alt.innerHTML = 'Không phát được? <a href="https://www.youtube.com/watch?v=' + p.dataset.ytId + '" target="_blank" rel="noopener">Xem phim trên YouTube ↗</a>';
+    p.after(alt);
+  }
+  p.querySelector('.fm-play').addEventListener('click', () => {
+    const id = p.dataset.ytId;
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1&origin=' + encodeURIComponent(location.origin);
+    f.referrerPolicy = 'strict-origin-when-cross-origin'; f.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture'; f.allowFullscreen = true; f.title = p.querySelector('img').alt;
+    p.append(f); p.querySelector('.fm-play').remove();
+  });
+})();
+
+// Chặn chuột phải / kéo thả trên ảnh, video (răn đe sao chép; ảnh đã đóng logo TAGENCY)
+['contextmenu', 'dragstart'].forEach(function (ev) {
+  document.addEventListener(ev, function (e) { if (e.target.closest && e.target.closest('img, video, .media')) e.preventDefault(); });
+});
+/* Tài nguyên: nhập số điện thoại trước khi tải (lưu Google Sheet qua TG_API, tab Khách hàng, nguồn "tai-ve"). Nhập 1 lần, nhớ trên máy. */
+(() => {
+  const links = document.querySelectorAll('.rs-dl a[download]'); if (!links.length) return;
+  const KEY = 'tg_phone', ok = v => /^(0|\+?84)(3|5|7|8|9)\d{8}$/.test(v.replace(/[\s.-]/g, ''));
+  const get = () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
+  const m = document.createElement('div'); m.className = 'dl-gate'; m.hidden = true;
+  m.innerHTML = '<form class="dl-box" novalidate><button type="button" class="dl-x" aria-label="Đóng">×</button><b>Nhận tài liệu miễn phí</b>' +
+    '<p>Để lại số điện thoại để tải. TAGENCY chỉ liên hệ khi bạn cần tư vấn, không spam.</p>' +
+    '<label for="dl-phone">Số điện thoại</label><input id="dl-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx" required>' +
+    '<input name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">' +
+    '<small class="dl-err" role="alert" hidden>Số điện thoại chưa đúng (10 số, bắt đầu bằng 03, 05, 07, 08, 09).</small>' +
+    '<button class="btn sun" type="submit">Tải tài liệu</button></form>';
+  document.body.appendChild(m);
+  const f = m.querySelector('form'), inp = f.phone, err = m.querySelector('.dl-err'); let pending = null;
+  const close = () => { m.hidden = true; pending = null; };
+  const go = a => { const x = document.createElement('a'); x.href = a.href; x.download = ''; document.body.appendChild(x); x.click(); x.remove(); };
+  links.forEach(a => a.addEventListener('click', e => {
+    if (get()) return;
+    e.preventDefault(); pending = a; m.hidden = false; err.hidden = true; inp.focus();
+  }));
+  m.querySelector('.dl-x').onclick = close;
+  m.addEventListener('click', e => { if (e.target === m) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !m.hidden) close(); });
+  f.addEventListener('submit', e => {
+    e.preventDefault(); const v = inp.value.trim();
+    if (!ok(v)) { err.hidden = false; inp.focus(); return; }
+    if (f.website.value) return close();
+    const name = pending.closest('.rs-card')?.querySelector('h3')?.textContent || 'Tài nguyên';
+    if (window.TG_API) fetch(window.TG_API, { method: 'POST', mode: 'no-cors', body: new URLSearchParams({ type: 'lead', source: 'tai-ve', phone: v, name: 'Tải tài nguyên', service: name, page: location.pathname.slice(1) }) }).catch(() => {});
+    try { localStorage.setItem(KEY, v); } catch (x) {}
+    const a = pending; close(); go(a);
+  });
 })();
