@@ -169,10 +169,7 @@
   }
 
   // biểu mẫu đặt lịch: gửi về data-endpoint nếu có, không thì mở ứng dụng email
-  // mã gói không dấu trong URL (?goi=phim-ky-niem-thanh-lap) -> nhãn tiếng Việt hiển thị trong ô tin nhắn
-  const GOI_LABELS = {'animation-gif':'Animation GIF','animation-clip-giai-phap':'Animation clip giải pháp','animation-giao-duc':'Animation giáo dục','animation-ngan':'Animation ngắn','landing-page':'Landing page','motion-du-an-bat-dong-san':'Motion dự án bất động sản','motion-graphics':'Motion graphics','motion-graphics-giai-phap':'Motion graphics giải pháp','motion-graphics-quang-cao':'Motion graphics quảng cáo','motion-graphics-san-pham':'Motion graphics sản phẩm','motion-graphics-ung-dung':'Motion graphics ứng dụng','motion-ra-mat-san-pham':'Motion ra mắt sản phẩm','nen-tang-web-game':'Nền tảng & web game','phim-doanh-nghiep':'Phim doanh nghiệp','phim-du-an-bat-dong-san':'Phim dự án bất động sản','phim-hoat-hinh-huong-dan':'Phim hoạt hình hướng dẫn','phim-hop-tac-doanh-nghiep':'Phim hợp tác doanh nghiệp','phim-ky-niem-thanh-lap':'Phim kỷ niệm thành lập','phim-motion-gioi-thieu-san-pham':'Phim motion giới thiệu sản phẩm','phim-tong-ket-nam':'Phim tổng kết năm','tvc-phim-tong-ket':'TVC & phim tổng kết','tvc-ban-hang':'TVC bán hàng','tvc-du-an-bat-dong-san':'TVC dự án bất động sản','tvc-gioi-thieu-thuong-hieu':'TVC giới thiệu thương hiệu','tvc-thuong-hieu':'TVC thương hiệu','teaser-chuong-trinh-noi-bo':'Teaser chương trình nội bộ','teaser-du-an':'Teaser dự án','video-su-kien':'Video sự kiện','video-truyen-thong-du-an':'Video truyền thông dự án','web-game-hoc-tap-cho-hoc-sinh':'Web game học tập cho học sinh','website-ban-san-pham':'Website bán sản phẩm','website-cong-ty':'Website công ty','website-doanh-nghiep':'Website doanh nghiệp','website-du-an-bat-dong-san':'Website dự án bất động sản','website-elearning':'Website eLearning','website-dao-tao-noi-bo':'Website đào tạo nội bộ'};
-  const goiParam = new URLSearchParams(location.search).get('goi');
-  const goi = goiParam ? (GOI_LABELS[goiParam] || goiParam) : null;
+  const goi = new URLSearchParams(location.search).get('goi');
   $$('form.brief').forEach(form => {
     if (goi && form.message) form.message.value = `Tôi quan tâm giải pháp ${goi}. `;
     form.addEventListener('submit', e => {
